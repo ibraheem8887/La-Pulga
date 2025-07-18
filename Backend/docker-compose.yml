@@ -1,0 +1,93 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - '3000:3000'
+    depends_on:
+      - admin-service
+      - product-service
+      - category-service
+      - checkout-service
+    networks:
+      - app-network
+
+  admin-service:
+    build: ./admin-service
+    container_name: admin-service
+    ports:
+      - '4002:4002'
+    networks:
+      - app-network
+    environment:
+      MONGO_DB_URL: mongodb://mongo-admin:27017/admin-db
+      JWT_SECRET: supersecret123
+
+  product-service:
+    build: ./products-service
+    container_name: product-service
+    ports:
+      - '4000:4000'
+    networks:
+      - app-network
+    environment:
+      MONGO_DB_URL: mongodb://mongo-product:27017/product
+
+  category-service:
+    build: ./category-service
+    container_name: category-service
+    ports:
+      - '4001:4001'
+    networks:
+      - app-network
+    environment:
+      MONGO_URL: mongodb://mongo-category:27017/category
+
+  checkout-service:
+    build: ./checkout-service
+    container_name: checkout-service
+    ports:
+      - '4004:4004'
+    networks:
+      - app-network
+    environment:
+      MONGO_DB_URL: mongodb://mongo-checkout:27017/order
+      STRIPE_SECRET_KEY: sk_test_51RjaCc2YCFbZkcFKSEGzdRnXV3Kua2XxOGkooItFMa8hoNjdbTS0JOdWI687BlstQcLuZ9WO6ULGLXU6f4snBtAJ00ZvGFFmag
+
+  mongo-admin:
+    image: mongo
+    container_name: mongo-admin
+    ports:
+      - '27017:27017'
+    networks:
+      - app-network
+
+  mongo-product:
+    image: mongo
+    container_name: mongo-product
+    ports:
+      - '27018:27017'
+    networks:
+      - app-network
+
+  mongo-category:
+    image: mongo
+    container_name: mongo-category
+    ports:
+      - '27019:27017'
+    networks:
+      - app-network
+
+  mongo-checkout:
+    image: mongo
+    container_name: mongo-checkout
+    ports:
+      - '27020:27017'
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
