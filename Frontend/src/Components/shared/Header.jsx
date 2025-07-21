@@ -14,7 +14,7 @@ const Header = ({ setCategoryFilter, categories=[] , search, setSearch }) => {
     return (
         <div className='bg-white grid h-30 '>
             <div className=''>
-                <marquee className="bg-black text-white" behavior="scroll" direction="left">Ankra Messsi </marquee>
+                <marquee className="bg-black text-white" behavior="scroll" direction="left">La Pulga </marquee>
             </div>
 
             <div className='grid'>
