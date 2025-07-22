@@ -1,4 +1,5 @@
-# E-Commerce Application
+# La-Pulga
+An E-Commerce Application
 
 A full-stack e-commerce application built with a microservices architecture, featuring a React frontend and Node.js backend services.
 
