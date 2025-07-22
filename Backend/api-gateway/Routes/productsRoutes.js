@@ -6,7 +6,7 @@ const multer = require('multer');
 const upload = multer(); // temporary storage
 const { requireAuthorization, requireAuthentication } = require('../authMiddleware');
 
-const SERVICE_URL = 'http:///localhost:4000/products';
+const SERVICE_URL = 'http://product-service:4000/products';
 
 router.get('/', async (req, res) => {
   try {
@@ -16,9 +16,16 @@ router.get('/', async (req, res) => {
 
     res.json(response.data);
   } catch (err) {
+    console.error('❌ Product list proxy error:', {
+      status: err.response?.status,
+      data: err.response?.data,
+      message: err.message,
+    });
+
     res.status(500).json({ error: 'Product service failed' });
   }
 });
+
 
 
 router.post('/', requireAuthorization, requireAuthentication, async (req, res) => {

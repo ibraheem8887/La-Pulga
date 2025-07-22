@@ -3,7 +3,7 @@ const axios = require('axios');
 const { requireAuthorization, requireAuthentication } = require('../authMiddleware');
 
 const router = Router();
-const SERVICE_URL = 'http://localhost:4001/category';
+const SERVICE_URL = 'http://category-service:4001/category';
 
 router.get('/', async (req, res) => {
   try {

@@ -3,7 +3,7 @@ const router = express.Router();
 const axios = require('axios');
 const { requireAuthorization, requireAuthentication } = require('../authMiddleware');
 
-const SERVICE_URL = 'http://localhost:4004/orders';
+const SERVICE_URL = 'http://checkout-service:4004/orders';
 
 
 

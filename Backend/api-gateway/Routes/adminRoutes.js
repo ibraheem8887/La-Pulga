@@ -2,7 +2,7 @@ const { Router } = require('express');
 const axios = require('axios');
 
 const router = Router();
-const SERVICE_URL = 'http://localhost:4002/admin';
+const SERVICE_URL = 'http://admin-service:4002/admin';
 
 router.post('/login', async (req, res) => {
   try {
