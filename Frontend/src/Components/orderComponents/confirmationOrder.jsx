@@ -15,16 +15,16 @@ const ConfirmationOrder = ({ onClose }) => {
 
   const returnToHome = async () => {
     console.log(order.email);
-    try {
-      await api.post('orders/send-email', {
-        to: `${order.email}`,
-        text: 'Thank you for your order! Your order has been successfully placed.'
-      });
+    // try {
+    //   await api.post('orders/send-email', {
+    //     to: `${order.email}`,
+    //     text: 'Thank you for your order! Your order has been successfully placed.'
+    //   });
 
-      console.log('Confirmation email sent');
-    } catch (err) {
-      console.error('Email sending failed', err);
-    }
+    //   console.log('Confirmation email sent');
+    // } catch (err) {
+    //   console.error('Email sending failed', err);
+    // }
 
     clearCart();
     navigate('/');

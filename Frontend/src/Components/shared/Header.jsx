@@ -1,78 +1,99 @@
 import React, { useState } from 'react';
 import Search from "./Search";
 import { useNavigate } from 'react-router-dom';
+import { FaSearch } from 'react-icons/fa';
+import { FaShieldAlt } from 'react-icons/fa';
 
 
-const Header = ({ setCategoryFilter, categories=[] , search, setSearch }) => {
-
+const Header = ({ setCategoryFilter, categories = [], search, setSearch }) => {
     const [isClicked, setClicked] = useState(false);
     const navigate = useNavigate();
-    const abc = () => {
 
+    const handleAdminLogin = () => {
         navigate('/login');
-    }
+    };
     return (
-        <div className='bg-white grid h-30 '>
-            <div className=''>
-                <marquee className="bg-black text-white" behavior="scroll" direction="left">Ankra Messsi </marquee>
+        <div className="bg-white border-b">
+            {/* Top Bar */}
+            <div className="bg-black text-white py-2">
+                <div className="max-w-6xl mx-auto px-4 text-center">
+                    <marquee className="text-sm">Free shipping on orders over $100</marquee>
+                </div>
             </div>
 
-            <div className='grid'>
-                <div className="w-full p-4 bg-white ">
-
-                    <div>
-                        <p className="text-center font-bold font-serif text-3xl">LA PULGA</p>
-                    </div>
-
-                    <div>
-                        <div className="grid grid-cols-3 justify-between items-center mt-4">
-                            <div></div>
-                            <div className="flex justify-center space-x-6">
-                                <a href="#" onClick={(e) => { e.preventDefault(); alert("new arrivals"); }} className="text-red-600  whitespace-nowrap">New Arrivals</a>
-
-                                {categories.map((category, index) => (
-                                    <div key={index}>                                <a href="#" onClick={(e) => { e.preventDefault(); setCategoryFilter(category._id); console.log(category._id) }} className="text-black  whitespace-nowrap">{category.name}</a>
-                                    </div>
-                                ))}
-
-                                <a href="#" onClick={(e) => { e.preventDefault(); setCategoryFilter('');  }} className="whitespace-nowrap hover:text-purple-500 transition">All Categories</a>
-<button onClick={abc} className="text-blue-600 hover:underline bg-transparent border-none p-0 m-0 cursor-pointer">
-  Admin
-</button>
-                            </div>
-
-
-
-                            <div className=' grid grid-cols-2 justify-end items-center  transition-all '>
-
-                                <button onClick={() => setClicked(!isClicked)} className='grid justify-end h-auto min-w-auto'>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth={2}
-                                        stroke="currentColor"
-                                        className="w-3 h-5"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M21 21l-4.35-4.35m1.57-5.07a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z"
-                                        />
-                                    </svg>
-                                </button>
-
-                                {isClicked ? <Search setSearch={setSearch} search={search}></Search> : ""}
-
-                            </div>
-                        </div>
-                    </div>
-
+            {/* Main Header */}
+            <div className="max-w-6xl mx-auto px-4 py-6">
+                {/* Logo */}
+                <div className="text-center mb-6">
+                    <h1 className="text-3xl font-serif text-gray-900">LA PULGA</h1>
                 </div>
 
+                {/* Navigation & Actions */}
+                <div className="flex items-center justify-between">
+                    {/* Left spacer */}
+                    <div className="w-32"></div>
+
+                    {/* Center Navigation */}
+                    <nav className="flex space-x-8">
+                        <button
+                            onClick={(e) => { e.preventDefault(); alert("new arrivals"); }}
+                            className="text-red-500 font-medium hover:text-red-600 transition-colors"
+                        >
+                            New Arrivals
+                        </button>
+
+                        {categories.map((category, index) => (
+                            <button
+                                key={index}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setCategoryFilter(category._id);
+                                }}
+                                className="text-gray-700 hover:text-gray-900 transition-colors"
+                            >
+                                {category.name}
+                            </button>
+                        ))}
+
+                        <button
+                            onClick={(e) => { e.preventDefault(); setCategoryFilter(''); }}
+                            className="text-gray-700 hover:text-gray-900 transition-colors"
+                        >
+                            All Categories
+                        </button>
+                    </nav>
+
+                    {/* Right Actions */}
+                    <div className="flex items-center space-x-4 w-32 justify-end">
+                        {/* Search */}
+                        <div className="relative">
+                            <button
+                                onClick={() => setClicked(!isClicked)}
+                                className="text-gray-600 hover:text-gray-800 transition-colors"
+                            >
+                                <FaSearch className="w-5 h-5" />
+                            </button>
+
+                            {isClicked && (
+                                <div className="absolute right-0 top-full mt-2 w-52 bg-white border rounded-lg shadow-lg p-3 z-50">
+                                    Search
+                                    <Search setSearch={setSearch} search={search} />
+                                </div>
+                            )}
+                        </div>
 
 
+                        <button
+                            onClick={handleAdminLogin}
+                            className="ml-6 mr-0 flex items-center gap-2 px-6 py-2.5  text-sm "
+                        >
+                            <FaShieldAlt className="text-back text-base" />
+                            Admin
+                        </button>
 
+
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -7,7 +7,7 @@ export const addOrder = async (data) => {
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
-        timeout: 5000,
+     
       });
       return response.data;
     } catch (error) {

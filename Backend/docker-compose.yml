@@ -22,7 +22,7 @@ services:
     networks:
       - app-network
     environment:
-      MONGO_DB_URL: mongodb://mongo-admin:27017/admin-db
+      MONGO_DB_URL: mongodb+srv://ibraheemshahid:ibraheem@clusterib.2sdfvqt.mongodb.net/admin-db?retryWrites=true&w=majority&appName=Clusterib
       JWT_SECRET: supersecret123
 
   product-service:
@@ -33,7 +33,7 @@ services:
     networks:
       - app-network
     environment:
-      MONGO_DB_URL: mongodb://mongo-product:27017/product
+      MONGO_DB_URL: mongodb+srv://ibraheemshahid:ibraheem@clusterib.2sdfvqt.mongodb.net/product?retryWrites=true&w=majority&appName=Clusterib
 
   category-service:
     build: ./category-service
@@ -43,7 +43,7 @@ services:
     networks:
       - app-network
     environment:
-      MONGO_URL: mongodb://mongo-category:27017/category
+      MONGO_URL: mongodb+srv://ibraheemshahid:ibraheem@clusterib.2sdfvqt.mongodb.net/category?retryWrites=true&w=majority&appName=Clusterib
 
   checkout-service:
     build: ./checkout-service
@@ -53,40 +53,8 @@ services:
     networks:
       - app-network
     environment:
-      MONGO_DB_URL: mongodb://mongo-checkout:27017/order
+      MONGO_DB_URL: mongodb+srv://ibraheemshahid:ibraheem@clusterib.2sdfvqt.mongodb.net/order?retryWrites=true&w=majority&appName=Clusterib
       STRIPE_SECRET_KEY: sk_test_51RjaCc2YCFbZkcFKSEGzdRnXV3Kua2XxOGkooItFMa8hoNjdbTS0JOdWI687BlstQcLuZ9WO6ULGLXU6f4snBtAJ00ZvGFFmag
-
-  mongo-admin:
-    image: mongo
-    container_name: mongo-admin
-    ports:
-      - '27017:27017'
-    networks:
-      - app-network
-
-  mongo-product:
-    image: mongo
-    container_name: mongo-product
-    ports:
-      - '27018:27017'
-    networks:
-      - app-network
-
-  mongo-category:
-    image: mongo
-    container_name: mongo-category
-    ports:
-      - '27019:27017'
-    networks:
-      - app-network
-
-  mongo-checkout:
-    image: mongo
-    container_name: mongo-checkout
-    ports:
-      - '27020:27017'
-    networks:
-      - app-network
 
 networks:
   app-network:

@@ -50,7 +50,7 @@ const CategoryForm = ({ data,isEdit , onClose , submit }) => {
             {...register('name')}
             className={`border rounded px-3 py-2 ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
             placeholder={isEdit ? undefined : "Enter category name"}
-            defaultValue={isEdit ? data.name : undefined} // Initial value only
+            defaultValue={isEdit ? data.name : undefined} 
 
           />
           {errors.name && (

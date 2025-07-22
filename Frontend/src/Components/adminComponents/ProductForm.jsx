@@ -98,9 +98,8 @@ const ProductForm = ({ data, isEdit, onClose, submit }) => {
           <label className=" text-sm font-medium text-gray-700">Product Name*</label>
           <input
             {...register('name')}
-            className={`mt-1 w-full px-4 py-2 rounded-md border ${
-              errors.name ? 'border-red-500' : 'border-gray-300'
-            }`}
+            className={`mt-1 w-full px-4 py-2 rounded-md border ${errors.name ? 'border-red-500' : 'border-gray-300'
+              }`}
             defaultValue={isEdit ? data.name : ''}
           />
           {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
@@ -125,9 +124,8 @@ const ProductForm = ({ data, isEdit, onClose, submit }) => {
               type="number"
               step="0.01"
               {...register('price')}
-              className={`mt-1 w-full px-4 py-2 rounded-md border ${
-                errors.price ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`mt-1 w-full px-4 py-2 rounded-md border ${errors.price ? 'border-red-500' : 'border-gray-300'
+                }`}
               defaultValue={isEdit ? data.price : ''}
             />
             {errors.price && <p className="text-red-500 text-xs mt-1">{errors.price.message}</p>}
@@ -138,9 +136,8 @@ const ProductForm = ({ data, isEdit, onClose, submit }) => {
             <input
               type="number"
               {...register('sku')}
-              className={`mt-1 w-full px-4 py-2 rounded-md border ${
-                errors.sku ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`mt-1 w-full px-4 py-2 rounded-md border ${errors.sku ? 'border-red-500' : 'border-gray-300'
+                }`}
               defaultValue={isEdit ? data.sku : ''}
             />
             {errors.sku && <p className="text-red-500 text-xs mt-1">{errors.sku.message}</p>}
@@ -152,9 +149,8 @@ const ProductForm = ({ data, isEdit, onClose, submit }) => {
           <label className="block text-sm font-medium text-gray-700">Category*</label>
           <select
             {...register('category')}
-            className={`mt-1 w-full px-4 py-2 rounded-md border ${
-              errors.category ? 'border-red-500' : 'border-gray-300'
-            }`}
+            className={`mt-1 w-full px-4 py-2 rounded-md border ${errors.category ? 'border-red-500' : 'border-gray-300'
+              }`}
             defaultValue={isEdit ? data.category : ''}
           >
             <option value="">Select a category</option>
@@ -179,9 +175,8 @@ const ProductForm = ({ data, isEdit, onClose, submit }) => {
             accept="image/*"
             multiple
             onChange={handleImageChange}
-            className={`mt-1 w-full px-4 py-2 rounded-md border ${
-              errors.images ? 'border-red-500' : 'border-gray-300'
-            }`}
+            className={`mt-1 w-full px-4 py-2 rounded-md border ${errors.images ? 'border-red-500' : 'border-gray-300'
+              }`}
           />
           {errors.images && <p className="text-red-500 text-xs mt-1">{errors.images.message}</p>}
 

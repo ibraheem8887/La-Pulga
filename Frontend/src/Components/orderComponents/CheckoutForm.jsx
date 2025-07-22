@@ -17,7 +17,7 @@ const schema = yup.object().shape({
 
 export default function Checkout() {
   const navigate = useNavigate();
-  const {  cartData } = useCart();
+  const { cartData } = useCart();
   const {
     register,
     handleSubmit,
@@ -40,76 +40,131 @@ export default function Checkout() {
       })),
       totalPrice,
     };
-  
-    // Save order to localStorage
+
     localStorage.setItem('latestOrder', JSON.stringify(orderData));
-  
-    // Navigate to order details page
+
     navigate('/OrderDetails');
   };
-  
+
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg space-y-6"
-      >
-        <h2 className="text-2xl font-bold text-gray-800 text-center">Checkout</h2>
-
-        {/* Email */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-          <input
-            type="email"
-            {...register('email')}
-            className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-          {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>}
+    <div className="min-h-screen bg-gray-50 py-8 px-4">
+      <div className="max-w-2xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Checkout</h1>
+          <p className="text-gray-600">Complete your order details</p>
         </div>
 
-        {/* Full Name */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-          <input
-            type="text"
-            {...register('fullName')}
-            className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-          {errors.fullName && <p className="text-sm text-red-500 mt-1">{errors.fullName.message}</p>}
-        </div>
+        <div className="grid lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow-sm border p-6 sticky top-8">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Order Summary</h3>
 
-        {/* Phone */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-          <input
-            type="text"
-            {...register('phone')}
-            className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-          {errors.phone && <p className="text-sm text-red-500 mt-1">{errors.phone.message}</p>}
-        </div>
+              <div className="space-y-3 mb-4">
+                {cartData.map((item, index) => (
+                  <div key={index} className="flex justify-between items-center text-sm">
+                    <div className="flex-1">
+                      <p className="font-medium text-gray-900">{item.name}</p>
+                      <p className="text-gray-500">Qty: {item.quantity}</p>
+                    </div>
+                    <p className="font-medium text-gray-900">${(item.price * item.quantity).toFixed(2)}</p>
+                  </div>
+                ))}
+              </div>
 
-        {/* Address */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
-          <textarea
-            rows={3}
-            {...register('address')}
-            className="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-          ></textarea>
-          {errors.address && <p className="text-sm text-red-500 mt-1">{errors.address.message}</p>}
-        </div>
+              <div className="border-t pt-4">
+                <div className="flex justify-between items-center">
+                  <p className="text-lg font-semibold text-gray-900">Total</p>
+                  <p className="text-lg font-bold text-blue-600">${totalPrice.toFixed(2)}</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-       
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition"
-        >
-          Procced to Confirm order
-        </button>
-      </form>
+          {/* Checkout Form */}
+          <div className="lg:col-span-2">
+            <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-lg shadow-sm border p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-6">Shipping Information</h3>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Email */}
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="your@email.com"
+                    {...register('email')}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                  />
+                  {errors.email && (
+                    <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>
+                  )}
+                </div>
+
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="ibraheem shahid"
+                    {...register('fullName')}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                  />
+                  {errors.fullName && (
+                    <p className="text-sm text-red-600 mt-1">{errors.fullName.message}</p>
+                  )}
+                </div>
+
+                <div className="md:col-span-1">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="03000000000"
+                    {...register('phone')}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                  />
+                  {errors.phone && (
+                    <p className="text-sm text-red-600 mt-1">{errors.phone.message}</p>
+                  )}
+                </div>
+
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Shipping Address *
+                  </label>
+                  <textarea
+                    rows={4}
+                    placeholder="123 Main Street, City"
+                    {...register('address')}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
+                  />
+                  {errors.address && (
+                    <p className="text-sm text-red-600 mt-1">{errors.address.message}</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="mt-8 pt-6 border-t">
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                >
+                  Proceed to Order Confirmation
+                </button>
+                <p className="text-xs text-gray-500 text-center mt-3">
+                  By proceeding, you agree to our terms and conditions
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
