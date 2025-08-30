@@ -36,7 +36,7 @@ This application follows a microservices architecture with the following compone
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone 
    cd E-commerce
    ```
 
